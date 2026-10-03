@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Comic Preview - ComicCraft
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="/static/css/style.css"
+    >
+
+</head>
+
+<body>
+
+<main class="container">
+
+    <header class="page-header">
+
+        <div>
+
+            <div class="badge">
+                YOUR GENERATED COMIC
+            </div>
+
+            <h1>
+                Comic Preview
+            </h1>
+
+        </div>
+
+        <a
+            class="secondary"
+            href="/"
+        >
+            New Comic
+        </a>
+
+    </header>
+
+
+    <section class="comic-grid">
+
+        {% for panel in layout %}
+
+        <article class="panel-card">
+
+            <div class="panel-title">
+
+                Panel
+                {{ panel.panel_number }}
+                ·
+                {{ panel.title }}
+
+            </div>
+
+
+            <img
+                src="{{ panel.image_url }}"
+                alt="Comic panel {{ panel.panel_number }}"
+            >
+
+
+            <p class="scene">
+
+                <em>
+                    {{ panel.scene_description }}
+                </em>
+
+            </p>
+
+
+            {% if panel.caption %}
+
+            <p>
+
+                <strong>
+                    Caption:
+                </strong>
+
+                {{ panel.caption }}
+
+            </p>
+
+            {% endif %}
+
+
+            {% if panel.narration %}
+
+            <p>
+
+                <strong>
+                    Narration:
+                </strong>
+
+                {{ panel.narration }}
+
+            </p>
+
+            {% endif %}
+
+
+            {% for line in panel.dialogue %}
+
+            <p class="dialogue">
+
+                "{{ line }}"
+
+            </p>
+
+            {% endfor %}
+
+
+            <details>
+
+                <summary>
+                    Image Prompt
+                </summary>
+
+                <p>
+                    {{ panel.image_prompt }}
+                </p>
+
+            </details>
+
+        </article>
+
+        {% endfor %}
+
+    </section>
+
+
+    <div class="actions">
+
+        <a
+            class="primary"
+            href="{{ pdf_url }}"
+        >
+            Download Your Comic as PDF
+        </a>
+
+        <a
+            class="secondary"
+            href="/"
+        >
+            Create Another Comic
+        </a>
+
+    </div>
+
+</main>
+
+</body>
+</html>
